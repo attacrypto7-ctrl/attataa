@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YGMB - Yayasan Generasi Muda Berguna</title>
+  <meta name="description" content="Yayasan Generasi Muda Berguna">
+  <link rel="icon" type="image/png" href="LOGO 1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- ====== REUSABLE MODAL ====== -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Tutup Modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+      <div class="modal-body" id="modalBody">
+        <!-- Content inserted by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== HEADER & NAVBAR ====== -->
+  <header class="header" id="header">
+    <nav class="navbar">
+      <a href="#" class="nav-logo" aria-label="YGMB Home">
+        <img src="LOGO 1.png" alt="Logo YGMB" class="navbar-logo-img">
+        <span class="logo-text">YGMB</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link magnetic-link" data-magnetic>Beranda</a></li>
+        <li><a href="#tentang" class="nav-link magnetic-link" data-magnetic>Tentang</a></li>
+        <li><a href="#berita" class="nav-link magnetic-link" data-magnetic>Berita</a></li>
+        <li><a href="#program" class="nav-link magnetic-link" data-magnetic>Program</a></li>
+        <li><a href="#kontak" class="nav-link magnetic-link" data-magnetic>Kontak</a></li>
+      </ul>
+      <a href="#ygmb-peduli" class="nav-cta magnetic-btn" data-magnetic>Donasi Sekarang</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ====== HERO SECTION ====== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-gradient-overlay"></div>
+      <div class="hero-abstract hero-abstract-1" data-parallax-speed="0.03">GENERASI</div>
+      <div class="hero-abstract hero-abstract-2" data-parallax-speed="-0.02">MUDA</div>
+      <div class="hero-abstract hero-abstract-3" data-parallax-speed="0.04">BERGUNA</div>
+      <div class="hero-particles" id="heroParticles"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-tagline animate-fade-in">Yayasan Generasi Muda Berguna</p>
+      <h1 class="hero-title">
+        <span class="word-reveal" style="--i:0">Membangun</span>
+        <span class="word-reveal" style="--i:1">Generasi</span>
+        <span class="word-reveal" style="--i:2">Muda</span>
+        <span class="word-reveal" style="--i:3">Berguna</span>
+      </h1>
+      <p class="hero-desc animate-fade-in" style="--delay:0.8s">Bersama menciptakan masa depan yang lebih cerah melalui
+        pendidikan, pemberdayaan, dan aksi nyata untuk generasi muda Indonesia.
+
+      </p>
+      <a href="#ygmb-peduli" class="hero-cta magnetic-btn" data-magnetic>
+        <span class="cta-text">Donasi Sekarang</span>
+        <span class="cta-arrow">&rarr;</span>
+      </a>
+    </div>
+
+  </section>
+
+  <!-- ====== TENTANG KAMI ====== -->
+  <section class="tentang" id="tentang">
+    <div class="tentang-container">
+      <div class="tentang-text">
+        <span class="section-label animate-slide-up">Tentang Kami</span>
+        <h2 class="tentang-title">
+          <span class="text-reveal-line"><span class="text-reveal-inner animate-reveal">Kami percaya
+              setiap</span></span>
+          <span class="text-reveal-line"><span class="text-reveal-inner animate-reveal" style="--i:1">generasi muda
+              memiliki</span></span>
+          <span class="text-reveal-line"><span class="text-reveal-inner animate-reveal" style="--i:2">potensi luar
+              biasa.</span></span>
+        </h2>
+        <div class="tentang-visi-misi">
+          <div class="visi animate-slide-up" style="--i:1">
+            <h3>Visi</h3>
+            <p>Menjadi yayasan terdepan dalam mencetak generasi muda yang berdaya saing tinggi, berintegritas, dan
+              bermanfaat bagi bangsa dan negara.</p>
+          </div>
+          <div class="misi animate-slide-up" style="--i:2">
+            <h3>Misi</h3>
+            <p>Menyediakan akses pendidikan berkualitas, membangun karakter kepemimpinan, dan mendorong inovasi sosial
+              yang berkelanjutan.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3-Card Glassmorphism Grid -->
+      <div class="tentang-cards">
+        <div class="tentang-card tilt-card animate-zoom" data-tilt style="--i:0">
+          <div class="tentang-card-img">
+            <img src="LOGO 1.png" alt="Yayasan Generasi Muda Berguna" loading="lazy">
+          </div>
+          <div class="tentang-card-body">
+            <h3>Yayasan Generasi Muda Berguna</h3>
+          </div>
+        </div>
+        <div class="tentang-card tilt-card animate-zoom" data-tilt style="--i:1">
+          <div class="tentang-card-img tentang-card-img--green">
+            <img src="LOGO 2.png" alt="Lembaga Pendidikan" loading="lazy">
+          </div>
+          <div class="tentang-card-body">
+            <h3>Lembaga Pendidikan</h3>
+          </div>
+        </div>
+        <div class="tentang-card tilt-card animate-zoom" data-tilt style="--i:2">
+          <div class="tentang-card-img tentang-card-img--blue">
+            <img src="LOGO 3.png" alt="Program Unggulan YGMB" loading="lazy">
+          </div>
+          <div class="tentang-card-body">
+            <h3>Program Unggulan</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== NEWS HUB ====== -->
+  <section class="berita" id="berita">
+    <div class="berita-container">
+      <div class="berita-header">
+        <span class="section-label animate-slide-up">Berita Terkini</span>
+        <h2 class="berita-title animate-slide-up" style="--i:1">Jejak Langkah<br>Kami di Lapangan</h2>
+      </div>
+      <div class="berita-carousel-wrapper" style="position: relative;">
+        <!-- Pindah Navigation Buttons -->
+        <button class="berita-arrow berita-prev" id="beritaPrev" aria-label="Sebelumnya"
+          style="position: absolute; left: -24px; top: 50%; transform: translateY(-50%); z-index: 10;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <button class="berita-arrow berita-next" id="beritaNext" aria-label="Berikutnya"
+          style="position: absolute; right: -24px; top: 50%; transform: translateY(-50%); z-index: 10;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+
+        <div class="berita-slider-wrap">
+          <div class="berita-slider" id="beritaSlider">
+            <article class="berita-card animate-zoom" style="--i:0">
+              <div class="berita-card-badge">Program</div>
+              <div class="berita-card-img"><img src="BERITA 1.png" alt="Berita 1" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;"></div>
+              <div class="berita-card-body">
+                <time class="berita-date">10 Maret 2026</time>
+                <h3>Leadership Camp 2026 Resmi Dibuka</h3>
+                <p>Ratusan pemuda dari seluruh Indonesia berkumpul untuk mengikuti program pelatihan kepemimpinan
+                  intensif
+                  selama 5 hari.</p>
+                <span class="berita-read">Baca Selengkapnya &rarr;</span>
+              </div>
+            </article>
+            <article class="berita-card animate-zoom" style="--i:1">
+              <div class="berita-card-badge berita-badge-green">Donasi</div>
+              <div class="berita-card-img"><img src="BERITA 2.png" alt="Berita 2" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;"></div>
+              <div class="berita-card-body">
+                <time class="berita-date">5 Maret 2026</time>
+                <h3>200 Beasiswa Prestasi Tersalurkan</h3>
+                <p>YGMB berhasil menyalurkan beasiswa kepada 200 pelajar berprestasi yang membutuhkan dukungan
+                  pendidikan
+                  berkelanjutan.</p>
+                <span class="berita-read">Baca Selengkapnya &rarr;</span>
+              </div>
+            </article>
+            <article class="berita-card animate-zoom" style="--i:2">
+              <div class="berita-card-badge berita-badge-blue">Komunitas</div>
+              <div class="berita-card-img"><img src="BERITA 3.png" alt="Berita 3" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;"></div>
+              <div class="berita-card-body">
+                <time class="berita-date">28 Feb 2026</time>
+                <h3>Festival Pemuda 2026: Inovasi Tanpa Batas</h3>
+                <p>Lebih dari 3.000 peserta meramaikan Festival Pemuda tahunan dengan pameran inovasi, pertunjukan seni,
+                  dan diskusi inspiratif.</p>
+                <span class="berita-read">Baca Selengkapnya &rarr;</span>
+              </div>
+            </article>
+            <article class="berita-card animate-zoom" style="--i:3">
+              <div class="berita-card-badge">Sosial</div>
+              <div class="berita-card-img"><img src="BERITA 4.png" alt="Berita 4" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;"></div>
+              <div class="berita-card-body">
+                <time class="berita-date">20 Feb 2026</time>
+                <h3>Aksi Sosial Menyentuh 500 Keluarga</h3>
+                <p>Relawan YGMB turun langsung ke komunitas marginal, memberikan bantuan sembako, layanan kesehatan
+                  gratis, dan edukasi anak.</p>
+                <span class="berita-read">Baca Selengkapnya &rarr;</span>
+              </div>
+            </article>
+            <article class="berita-card animate-zoom" style="--i:4">
+              <div class="berita-card-badge berita-badge-green">Pendidikan</div>
+              <div class="berita-card-img"><img src="BERITA 5.png" alt="Berita 5" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;"></div>
+              <div class="berita-card-body">
+                <time class="berita-date">12 Feb 2026</time>
+                <h3>Workshop Digital Skills: 150 Peserta Antusias</h3>
+                <p>Pelatihan keterampilan digital bulanan dihadiri 150 pemuda yang bersemangat mengasah kemampuan di era
+                  transformasi digital.</p>
+                <span class="berita-read">Baca Selengkapnya &rarr;</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="berita-dots" id="beritaDots">
+        <button class="berita-dot active" data-slide="0" aria-label="Slide 1"></button>
+        <button class="berita-dot" data-slide="1" aria-label="Slide 2"></button>
+        <button class="berita-dot" data-slide="2" aria-label="Slide 3"></button>
+        <button class="berita-dot" data-slide="3" aria-label="Slide 4"></button>
+        <button class="berita-dot" data-slide="4" aria-label="Slide 5"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== #YGMB PEDULI ====== -->
+  <section class="peduli" id="ygmb-peduli">
+    <div class="peduli-container">
+      <div class="peduli-header">
+        <span class="section-label animate-slide-up">#YGMB Peduli</span>
+        <h2 class="peduli-title animate-slide-up" style="--i:1">Bersama Kita Bisa<br>Membuat Perbedaan</h2>
+        <p class="peduli-desc animate-slide-up" style="--i:2">Setiap donasi Anda adalah harapan bagi generasi muda yang
+          membutuhkan. Bergabunglah bersama ribuan donatur yang telah mengubah hidup mereka.</p>
+      </div>
+
+      <!-- Overall Progress -->
+      <div class="peduli-overall animate-fade-in">
+        <div class="peduli-overall-info">
+          <div>
+            <span class="peduli-stat-num" data-count="847500000">0</span>
+            <span class="peduli-stat-label">Terkumpul dari target Rp 1 Miliar</span>
+          </div>
+          <div class="peduli-overall-pct">84.75%</div>
+        </div>
+        <div class="peduli-bar-wrap">
+          <div class="peduli-bar-fill" style="--target-w: 84.75%"></div>
+        </div>
+      </div>
+
+      <!-- Campaign Cards -->
+      <div class="peduli-grid">
+        <div class="peduli-card animate-zoom" style="--i:0" data-modal-target="peduli-modal-1" role="button"
+          tabindex="0" aria-label="Buka detail kampanye beasiswa">
+          <div class="peduli-card-photo"
+            style="height: 180px; border-radius: 12px; overflow: hidden; margin-bottom: 16px;">
+            <img src="MILESTONE 1.png" alt="Beasiswa Prestasi" loading="lazy"
+              style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <h3>Dana Beasiswa Prestasi</h3>
+          <div class="peduli-card-progress" style="margin-top:auto;">
+            <div class="peduli-prog-info">
+              <span>Rp 320 Jt</span><span>Target: Rp 400 Jt</span>
+            </div>
+            <div class="peduli-prog-bar">
+              <div class="peduli-prog-fill" style="--target-w:80%"></div>
+            </div>
+          </div>
+          <div class="peduli-card-footer" style="padding-top: 16px; border-top: none; justify-content: center;">
+            <span class="peduli-read-more btn-primary"
+              style="width: 100%; text-align: center; border-radius: 100px; padding: 12px; color: white; display: inline-block;">Baca
+              Selengkapnya</span>
+          </div>
+        </div>
+
+        <div class="peduli-card animate-zoom" style="--i:1" data-modal-target="peduli-modal-2" role="button"
+          tabindex="0" aria-label="Buka detail kampanye rumah kasih">
+          <div class="peduli-card-photo"
+            style="height: 180px; border-radius: 12px; overflow: hidden; margin-bottom: 16px;">
+            <img src="MILESTONE 2.png" alt="Rumah Kasih" loading="lazy"
+              style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <h3>Renovasi Rumah Kasih</h3>
+          <div class="peduli-card-progress" style="margin-top:auto;">
+            <div class="peduli-prog-info">
+              <span>Rp 175 Jt</span><span>Target: Rp 250 Jt</span>
+            </div>
+            <div class="peduli-prog-bar">
+              <div class="peduli-prog-fill peduli-prog-fill--green" style="--target-w:70%"></div>
+            </div>
+          </div>
+          <div class="peduli-card-footer" style="padding-top: 16px; border-top: none; justify-content: center;">
+            <span class="peduli-read-more btn-primary"
+              style="width: 100%; text-align: center; border-radius: 100px; padding: 12px; color: white; display: inline-block;">Baca
+              Selengkapnya</span>
+          </div>
+        </div>
+
+        <div class="peduli-card animate-zoom" style="--i:2" data-modal-target="peduli-modal-3" role="button"
+          tabindex="0" aria-label="Buka detail kampanye kit literasi">
+          <div class="peduli-card-photo"
+            style="height: 180px; border-radius: 12px; overflow: hidden; margin-bottom: 16px;">
+            <img src="MILESTONE 3.png" alt="Kit Literasi" loading="lazy"
+              style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <h3>Kit Literasi Digital</h3>
+          <div class="peduli-card-progress" style="margin-top:auto;">
+            <div class="peduli-prog-info">
+              <span>Rp 352.5 Jt</span><span>Target: Rp 350 Jt</span>
+            </div>
+            <div class="peduli-prog-bar">
+              <div class="peduli-prog-fill peduli-prog-fill--blue" style="--target-w:100%"></div>
+            </div>
+          </div>
+          <div class="peduli-card-footer" style="padding-top: 16px; border-top: none; justify-content: center;">
+            <span class="peduli-read-more btn-primary"
+              style="width: 100%; text-align: center; border-radius: 100px; padding: 12px; color: white; display: inline-block;">Baca
+              Selengkapnya</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="peduli-cta animate-fade-in">
+        <a href="https://wa.me/6281234567890?text=Halo%20YGMB%2C%20saya%20ingin%20berdonasi" target="_blank"
+          rel="noopener noreferrer" class="btn-primary magnetic-btn" data-magnetic>Donasi via WhatsApp</a>
+        <button class="btn-secondary magnetic-btn" data-modal-target="peduli-modal-bank" data-magnetic>Donasi Via
+          Bank</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hidden Modal Content for Peduli -->
+  <template id="peduli-modal-1">
+    <div class="modal-article">
+      <span class="modal-badge">Dana Beasiswa</span>
+      <h2 id="modalTitle">Dana Beasiswa Prestasi YGMB 2026</h2>
+      <div class="modal-prog-wrap">
+        <div class="modal-prog-info"><span>Rp 320.000.000 terkumpul</span><span>80%</span></div>
+        <div class="peduli-prog-bar">
+          <div class="peduli-prog-fill" style="--target-w:80%"></div>
+        </div>
+      </div>
+      <p>Program beasiswa ini lahir dari keyakinan bahwa <strong>tidak ada anak Indonesia yang seharusnya berhenti
+          bermimpi karena keterbatasan biaya</strong>. Sejak 2020, YGMB telah menyalurkan beasiswa kepada lebih dari 800
+        pelajar dari Sabang sampai Merauke.</p>
+      <h4>Apa yang akan didanai?</h4>
+      <ul>
+        <li>Biaya SPP dan sekolah selama 1 tahun akademik</li>
+        <li>Perlengkapan belajar: buku, seragam, dan alat tulis</li>
+        <li>Akses mentoring bulanan bersama profesional</li>
+        <li>Uang saku bulanan untuk transportasi dan kebutuhan dasar</li>
+      </ul>
+      <p>Dengan berdonasi, Anda menjadi bagian dari perjalanan seorang anak yang kelak akan menjadi pemimpin bangsa.
+        <strong>Donasikan kebaikan Anda hari ini.</strong>
+      </p>
+      <a href="https://wa.me/6281234567890?text=Saya%20ingin%20berdonasi%20untuk%20Beasiswa%20Prestasi" target="_blank"
+        rel="noopener noreferrer" class="btn-primary modal-donate-btn">Donasi Sekarang</a>
+    </div>
+  </template>
+
+  <template id="peduli-modal-2">
+    <div class="modal-article">
+      <span class="modal-badge modal-badge--green">Renovasi</span>
+      <h2 id="modalTitle">Renovasi Rumah Kasih Ar-Rahman</h2>
+      <div class="modal-prog-wrap">
+        <div class="modal-prog-info"><span>Rp 175.000.000 terkumpul</span><span>70%</span></div>
+        <div class="peduli-prog-bar">
+          <div class="peduli-prog-fill peduli-prog-fill--green" style="--target-w:70%"></div>
+        </div>
+      </div>
+      <p>Rumah Kasih Ar-Rahman adalah rumah bagi 150 anak yatim dan dhuafa. Bangunannya yang berusia 15 tahun kini
+        membutuhkan perbaikan menyeluruh agar anak-anak dapat belajar dan bertumbuh di lingkungan yang aman dan nyaman.
+      </p>
+      <h4>Rencana Renovasi:</h4>
+      <ul>
+        <li>Perbaikan atap dan dinding kelas yang bocor</li>
+        <li>Pembangunan perpustakaan mini dengan koleksi 2.000 buku</li>
+        <li>Instalasi panel surya untuk hemat energi</li>
+        <li>Taman bermain edukatif untuk anak usia dini</li>
+      </ul>
+      <p>Setiap rupiah yang Anda donasikan akan langsung berdampak pada kehidupan 150 anak yang menantikan perubahan
+        ini. <strong>Mari wujudkan rumah impian mereka bersama.</strong></p>
+      <a href="https://wa.me/6281234567890?text=Saya%20ingin%20berdonasi%20untuk%20Renovasi%20Rumah%20Kasih"
+        target="_blank" rel="noopener noreferrer" class="btn-primary modal-donate-btn">Donasi Sekarang</a>
+    </div>
+  </template>
+
+  <template id="peduli-modal-3">
+    <div class="modal-article">
+      <span class="modal-badge modal-badge--blue">Literasi Digital</span>
+      <h2 id="modalTitle">Kit Literasi Digital untuk Daerah 3T</h2>
+      <div class="modal-prog-wrap">
+        <div class="modal-prog-info"><span>Rp 352.500.000 terkumpul</span><span>✅ 100%</span></div>
+        <div class="peduli-prog-bar">
+          <div class="peduli-prog-fill peduli-prog-fill--blue" style="--target-w:100%"></div>
+        </div>
+      </div>
+      <p>Program ini telah <strong>berhasil mencapai target 100%</strong>! Berkat kepercayaan lebih dari 2.105 donatur,
+        kami berhasil mengadakan 100 laptop dan koneksi internet bagi pemuda di daerah Terdepan, Terluar, dan Tertinggal
+        (3T).</p>
+      <h4>Dampak yang Telah Tercapai:</h4>
+      <ul>
+        <li>100 laptop terdistribusi ke 5 kabupaten di Indonesia Timur</li>
+        <li>Pelatihan digital skills selama 3 bulan untuk semua penerima</li>
+        <li>15 pemuda telah berhasil mendapat pekerjaan remote</li>
+        <li>3 startup lokal lahir dari program ini</li>
+      </ul>
+      <p>Program ini sukses! Ingin berkontribusi untuk program selanjutnya? Hubungi kami melalui WhatsApp untuk
+        informasi program berikutnya.</p>
+      <a href="https://wa.me/6281234567890?text=Saya%20ingin%20informasi%20program%20donasi%20selanjutnya"
+        target="_blank" rel="noopener noreferrer" class="btn-primary modal-donate-btn"
+        style="background: linear-gradient(135deg, var(--accent-blue), #0670c7);">Tanyakan Program Lain</a>
+    </div>
+  </template>
+
+  <template id="peduli-modal-bank">
+    <div class="modal-article">
+      <span class="modal-badge modal-badge--green">Donasi Bank</span>
+      <h2 id="modalTitle">Formulir Konfirmasi Donasi</h2>
+      <p>Silakan lakukan transfer ke rekening resmi yayasan di bawah ini sebelum mengisi formulir konfirmasi.</p>
+
+      <div
+        style="background: var(--bg-section); padding: 16px; border-radius: 12px; border: 1px solid var(--border-light); margin-bottom: 24px; text-align: left;">
+        <p style="margin-bottom: 4px; font-size: 0.9rem;"><strong>Bank BCA</strong></p>
+        <p style="margin-bottom: 4px; font-size: 1.2rem; font-weight: 700; color: var(--primary);">123 456 7890</p>
+        <p style="margin-bottom: 0px; font-size: 0.9rem; color: var(--text-muted);">a.n Yayasan Generasi Muda Berguna
+        </p>
+      </div>
+
+      <form class="donation-form"
+        onsubmit="event.preventDefault(); alert('Konfirmasi Donasi Berhasil Dikirim!'); document.getElementById('modalClose').click();">
+        <div class="donation-form-group">
+          <label for="donaturName">Nama Lengkap</label>
+          <input type="text" id="donaturName" class="donation-form-input" placeholder="Masukkan nama Anda" required>
+        </div>
+        <div class="donation-form-group">
+          <label for="donasiTujuan">Donasi Untuk</label>
+          <select id="donasiTujuan" class="donation-form-input" required>
+            <option value="">Pilih Tujuan Donasi...</option>
+            <option value="tahunan">Program Tahunan</option>
+            <option value="bulanan">Program Bulanan</option>
+            <option value="mingguan">Program Mingguan</option>
+            <option value="umum">Donasi Umum</option>
+          </select>
+        </div>
+        <div class="donation-form-group">
+          <label for="donasiJumlah">Jumlah Transfer (Rp)</label>
+          <input type="number" id="donasiJumlah" class="donation-form-input" placeholder="Contoh: 100000" min="10000"
+            required>
+        </div>
+        <div class="donation-form-group">
+          <label for="donasiBukti">Upload Bukti Transfer</label>
+          <input type="file" id="donasiBukti" class="donation-form-input" accept="image/*" required
+            style="padding-top: 9px;">
+        </div>
+        <button type="submit" class="modal-donate-btn"
+          style="width: 100%; justify-content: center; margin-top: 16px; border: none; font-family: inherit;">Kirim
+          Konfirmasi</button>
+      </form>
+    </div>
+  </template>
+
+  <!-- ====== PROGRAM ====== -->
+  <section class="program" id="program">
+    <div class="program-container">
+      <div class="program-header">
+        <span class="section-label animate-slide-up">Program Kerja</span>
+        <h2 class="program-title animate-slide-up" style="--i:1">Langkah Nyata untuk<br>Perubahan Berkelanjutan</h2>
+      </div>
+
+      <!-- Program Tabs -->
+      <div class="program-tabs animate-fade-in">
+        <button class="program-tab active" data-tab="tahunan"><span class="tab-icon">&#128197;</span>Program
+          Tahunan</button>
+        <button class="program-tab" data-tab="bulanan"><span class="tab-icon">&#128467;</span>Program Bulanan</button>
+        <button class="program-tab" data-tab="mingguan"><span class="tab-icon">&#128336;</span>Program Mingguan</button>
+      </div>
+
+      <!-- Panel: Tahunan -->
+      <div class="program-panel active" id="panel-tahunan">
+        <div class="program-grid">
+          <div class="program-card tilt-card animate-zoom" data-tilt
+            data-modal-content="<h2>Leadership Camp</h2><p>Program pelatihan kepemimpinan tahunan yang intensif, dirancang untuk membentuk karakter dan jiwa pemimpin sejati generasi muda Indonesia. Selama 5 hari peserta akan mengikuti sesi mentoring, outbound, dan presentasi proyek sosial.</p><h4>Highlights:</h4><ul><li>500+ peserta dari 34 provinsi</li><li>30 mentor profesional & tokoh nasional</li><li>Sertifikat internasional terverifikasi</li><li>Networking dengan alumni berprestasi</li></ul>">
+            <div class="card-glow"></div>
+            <div class="card-content">
+              <div class="program-card-photo"
+                style="height: 140px; border-radius: 12px; overflow: hidden; margin-bottom: 16px;">
+                <img src="PROGRAM 1.png" alt="Leadership Camp" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="program-badge"
+                style="display:inline-flex; align-items:center; background:rgba(255,107,53,0.1); color:var(--primary); padding:6px 12px; border-radius:100px; font-size:0.85rem; font-weight:700; margin-bottom:12px;">
+                👥 500+ Peserta per Tahun</div>
+              <h3>Leadership Camp</h3>
+              <p class="clamp-2" style="margin-bottom:16px;">Program pelatihan kepemimpinan tahunan yang membentuk
+                karakter dan jiwa pemimpin generasi muda Indonesia.</p>
+              <span class="peduli-read-more btn-secondary"
+                style="width: 100%; text-align: center; border-radius: 100px; padding: 10px; display: inline-block; margin-top: auto;">Baca
+                Selengkapnya</span>
+            </div>
+          </div>
+          <div class="program-card tilt-card animate-zoom" style="--i:1" data-tilt
+            data-modal-content="<h2>Beasiswa Prestasi</h2><p>Program beasiswa tahunan yang memberikan dukungan finansial penuh kepada generasi muda berprestasi dari seluruh Indonesia yang membutuhkan akses pendidikan berkualitas.</p><h4>Manfaat Penerima:</h4><ul><li>Biaya pendidikan penuh selama 1 tahun</li><li>Uang saku & perlengkapan belajar</li><li>Akses mentoring eksklusif bulanan</li><li>Bergabung dalam komunitas alumni</li></ul>">
+            <div class="card-glow"></div>
+            <div class="card-content">
+              <div class="program-card-photo"
+                style="height: 140px; border-radius: 12px; overflow: hidden; margin-bottom: 16px;">
+                <img src="MILESTONE 1.png" alt="Beasiswa Prestasi" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="program-badge"
+                style="display:inline-flex; align-items:center; background:rgba(46,204,113,0.1); color:var(--secondary-dark); padding:6px 12px; border-radius:100px; font-size:0.85rem; font-weight:700; margin-bottom:12px;">
+                🎓 200 Penerima Beasiswa</div>
+              <h3>Beasiswa Prestasi</h3>
+              <p class="clamp-2" style="margin-bottom:16px;">Program beasiswa tahunan untuk generasi muda berprestasi
+                dari seluruh Indonesia yang membutuhkan dukungan pendidikan.</p>
+              <span class="peduli-read-more btn-secondary"
+                style="width: 100%; text-align: center; border-radius: 100px; padding: 10px; display: inline-block; margin-top: auto;">Baca
+                Selengkapnya</span>
+            </div>
+          </div>
+          <div class="program-card tilt-card animate-zoom" style="--i:2" data-tilt
+            data-modal-content="<h2>Festival Pemuda</h2><p>Acara tahunan spektakuler yang mempertemukan generasi muda dari berbagai daerah untuk berkolaborasi, berinovasi, dan berkreasi dalam suasana yang inspiratif dan penuh semangat.</p><h4>Yang Ada di Festival:</h4><ul><li>Expo inovasi & startup muda</li><li>Pertunjukan seni & budaya nusantara</li><li>Kompetisi nasional lintas bidang</li><li>Bazar UMKM binaan YGMB</li></ul>">
+            <div class="card-glow"></div>
+            <div class="card-content">
+              <div class="program-card-photo"
+                style="height: 140px; border-radius: 12px; overflow: hidden; margin-bottom: 16px;">
+                <img src="PROGRAM 3.png" alt="Festival Pemuda" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="program-badge"
+                style="display:inline-flex; align-items:center; background:rgba(9,132,227,0.1); color:var(--accent-blue); padding:6px 12px; border-radius:100px; font-size:0.85rem; font-weight:700; margin-bottom:12px;">
+                🎉 3.000 Peserta Festival</div>
+              <h3>Festival Pemuda</h3>
+              <p class="clamp-2" style="margin-bottom:16px;">Acara tahunan yang mempertemukan generasi muda dari
+                berbagai daerah untuk berkolaborasi, berinovasi, dan berkreasi.</p>
+              <span class="peduli-read-more btn-secondary"
+                style="width: 100%; text-align: center; border-radius: 100px; padding: 10px; display: inline-block; margin-top: auto;">Baca
+                Selengkapnya</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel: Bulanan -->
+      <div class="program-panel" id="panel-bulanan">
+        <div class="program-grid">
+          <div class="program-card tilt-card animate-zoom" data-tilt
+            data-modal-content="<h2>Workshop Keterampilan</h2><p>Pelatihan keterampilan bulanan yang berfokus pada keahlian digital, public speaking, dan soft skill yang dibutuhkan di dunia kerja modern. Dipandu langsung oleh praktisi & expert di bidangnya.</p><h4>Materi Pelatihan:</h4><ul><li>Digital Marketing & Social Media</li><li>Public Speaking & Presentasi</li><li>Desain Grafis & Multimedia</li><li>Financial Literacy untuk Milenial</li></ul>">
+            <div class="card-glow"></div>
+            <div class="card-content">
+              <div class="program-card-photo"
+                style="height: 140px; border-radius: 12px; overflow: hidden; margin-bottom: 16px;">
+                <img src="PROGRAM 4.png" alt="Workshop Keterampilan" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="program-badge"
+                style="display:inline-flex; align-items:center; background:rgba(255,107,53,0.1); color:var(--primary); padding:6px 12px; border-radius:100px; font-size:0.85rem; font-weight:700; margin-bottom:12px;">
+                🧑‍💻 150 Peserta per Bulan</div>
+              <h3>Workshop Keterampilan</h3>
+              <p class="clamp-2" style="margin-bottom:16px;">Pelatihan keterampilan digital, public speaking, dan soft
+                skill setiap bulan untuk meningkatkan daya saing pemuda.</p>
+              <span class="peduli-read-more btn-secondary"
+                style="width: 100%; text-align: center; border-radius: 100px; padding: 10px; display: inline-block; margin-top: auto;">Baca
+                Selengkapnya</span>
+            </div>
+          </div>
+          <div class="program-card tilt-card animate-zoom" style="--i:1" data-tilt
+            data-modal-content="<h2>Mentoring Session</h2><p>Sesi mentoring bulanan eksklusif bersama para profesional, entrepreneur sukses, dan tokoh inspiratif dari berbagai bidang yang siap membimbing perjalanan karir dan kehidupan generasi muda.</p><h4>Format Mentoring:</h4><ul><li>1-on-1 mentoring intensif (60 menit)</li><li>Group session tematik (15-20 peserta)</li><li>Q&A sesi terbuka bersama mentor</li><li>Akses rekaman sesi seumur hidup</li></ul>">
+            <div class="card-glow"></div>
+            <div class="card-content">
+              <div class="program-card-photo"
+                style="height: 140px; border-radius: 12px; overflow: hidden; margin-bottom: 16px;">
+                <img src="PROGRAM 5.png" alt="Mentoring Session" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="program-badge"
+                style="display:inline-flex; align-items:center; background:rgba(46,204,113,0.1); color:var(--secondary-dark); padding:6px 12px; border-radius:100px; font-size:0.85rem; font-weight:700; margin-bottom:12px;">
+                💡 80 Mentor Aktif</div>
+              <h3>Mentoring Session</h3>
+              <p class="clamp-2" style="margin-bottom:16px;">Sesi mentoring bulanan bersama para profesional dan tokoh
+                inspiratif untuk membimbing karir generasi muda.</p>
+              <span class="peduli-read-more btn-secondary"
+                style="width: 100%; text-align: center; border-radius: 100px; padding: 10px; display: inline-block; margin-top: auto;">Baca
+                Selengkapnya</span>
+            </div>
+          </div>
+          <div class="program-card tilt-card animate-zoom" style="--i:2" data-tilt
+            data-modal-content="<h2>Aksi Sosial Bulanan</h2><p>Kegiatan bakti sosial rutin setiap bulan yang mengajak generasi muda untuk turun langsung ke komunitas, memberikan dampak nyata, dan menumbuhkan kepedulian serta empati sosial.</p><h4>Bentuk Aksi Sosial:</h4><ul><li>Pembagian sembako & kebutuhan pokok</li><li>Layanan kesehatan gratis di pelosok</li><li>Edukasi & donasi buku untuk SD terpencil</li><li>Pemberdayaan UMKM mikro</li></ul>">
+            <div class="card-glow"></div>
+            <div class="card-content">
+              <div class="program-card-photo"
+                style="height: 140px; border-radius: 12px; overflow: hidden; margin-bottom: 16px;">
+                <img src="PROGRAM 6.png" alt="Aksi Sosial" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="program-badge"
+                style="display:inline-flex; align-items:center; background:rgba(9,132,227,0.1); color:var(--accent-blue); padding:6px 12px; border-radius:100px; font-size:0.85rem; font-weight:700; margin-bottom:12px;">
+                🤝 320 Kegiatan Terlaksana</div>
+              <h3>Aksi Sosial Bulanan</h3>
+              <p class="clamp-2" style="margin-bottom:16px;">Kegiatan bakti sosial rutin setiap bulan di berbagai
+                komunitas untuk menumbuhkan kepedulian dan empati pemuda.</p>
+              <span class="peduli-read-more btn-secondary"
+                style="width: 100%; text-align: center; border-radius: 100px; padding: 10px; display: inline-block; margin-top: auto;">Baca
+                Selengkapnya</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel: Mingguan -->
+      <div class="program-panel" id="panel-mingguan">
+        <div class="program-grid">
+          <div class="program-card tilt-card animate-zoom" data-tilt
+            data-modal-content="<h2>Study Club</h2><p>Kelompok belajar mandiri yang aktif setiap minggu, membahas topik-topik relevan mulai dari teknologi terkini, strategi bisnis, hingga pengembangan diri dan produktivitas.</p><h4>Topik Mingguan:</h4><ul><li>Teknologi & AI: Tren masa depan</li><li>Business & Entrepreneurship</li><li>Self-Development & Mindset</li><li>Bahasa Asing & Komunikasi Global</li></ul>">
+            <div class="card-glow"></div>
+            <div class="card-content">
+              <div class="program-card-photo"
+                style="height: 140px; border-radius: 12px; overflow: hidden; margin-bottom: 16px;">
+                <img src="PROGRAM 7.png" alt="Study Club" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="program-badge"
+                style="display:inline-flex; align-items:center; background:rgba(255,107,53,0.1); color:var(--primary); padding:6px 12px; border-radius:100px; font-size:0.85rem; font-weight:700; margin-bottom:12px;">
+                📚 25 Kelompok Aktif</div>
+              <h3>Study Club</h3>
+              <p class="clamp-2" style="margin-bottom:16px;">Kelompok belajar mingguan yang membahas berbagai topik
+                mulai dari teknologi, bisnis, hingga pengembangan diri.</p>
+              <span class="peduli-read-more btn-secondary"
+                style="width: 100%; text-align: center; border-radius: 100px; padding: 10px; display: inline-block; margin-top: auto;">Baca
+                Selengkapnya</span>
+            </div>
+          </div>
+          <div class="program-card tilt-card animate-zoom" style="--i:1" data-tilt
+            data-modal-content="<h2>Olahraga & Kreasi</h2><p>Kegiatan mingguan yang memadukan olahraga fisik dan ekspresi kreatif untuk menjaga keseimbangan kesehatan fisik dan mental generasi muda, karena pikiran sehat lahir dari tubuh yang sehat.</p><h4>Kegiatan Mingguan:</h4><ul><li>Futsal & badminton kompetitif</li><li>Yoga & meditasi pagi</li><li>Workshop melukis & kerajinan tangan</li><li>Fotografi & videografi kreatif</li></ul>">
+            <div class="card-glow"></div>
+            <div class="card-content">
+              <div class="program-card-photo"
+                style="height: 140px; border-radius: 12px; overflow: hidden; margin-bottom: 16px;">
+                <img src="PROGRAM 8.png" alt="Olahraga & Kreasi" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="program-badge"
+                style="display:inline-flex; align-items:center; background:rgba(46,204,113,0.1); color:var(--secondary-dark); padding:6px 12px; border-radius:100px; font-size:0.85rem; font-weight:700; margin-bottom:12px;">
+                ⚽ 100 Peserta Rutin</div>
+              <h3>Olahraga & Kreasi</h3>
+              <p class="clamp-2" style="margin-bottom:16px;">Kegiatan olahraga dan kreativitas mingguan untuk menjaga
+                kesehatan fisik dan mental generasi muda.</p>
+              <span class="peduli-read-more btn-secondary"
+                style="width: 100%; text-align: center; border-radius: 100px; padding: 10px; display: inline-block; margin-top: auto;">Baca
+                Selengkapnya</span>
+            </div>
+          </div>
+          <div class="program-card tilt-card animate-zoom" style="--i:2" data-tilt
+            data-modal-content="<h2>Diskusi Komunitas</h2><p>Forum diskusi mingguan yang menghadirkan perspektif segar dari generasi muda tentang isu-isu aktual, mendorong pemikiran kritis, dan melahirkan solusi inovatif dari bawah.</p><h4>Format Diskusi:</h4><ul><li>Town hall terbuka (semua bisa bicara)</li><li>Panel discussion tematis</li><li>Workshop problem-solving kolaboratif</li><li>Publikasi hasil diskusi ke media sosial</li></ul>">
+            <div class="card-glow"></div>
+            <div class="card-content">
+              <div class="program-card-photo"
+                style="height: 140px; border-radius: 12px; overflow: hidden; margin-bottom: 16px;">
+                <img src="PROGRAM 9.png" alt="Diskusi Komunitas" loading="lazy"
+                  style="width:100%;height:100%;object-fit:cover;">
+              </div>
+              <div class="program-badge"
+                style="display:inline-flex; align-items:center; background:rgba(9,132,227,0.1); color:var(--accent-blue); padding:6px 12px; border-radius:100px; font-size:0.85rem; font-weight:700; margin-bottom:12px;">
+                🗣️ 50 Sesi per Bulan</div>
+              <h3>Diskusi Komunitas</h3>
+              <p class="clamp-2" style="margin-bottom:16px;">Forum diskusi mingguan yang membahas isu-isu terkini dan
+                solusi inovatif dari perspektif generasi muda.</p>
+              <span class="peduli-read-more btn-secondary"
+                style="width: 100%; text-align: center; border-radius: 100px; padding: 10px; display: inline-block; margin-top: auto;">Baca
+                Selengkapnya</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== MOTIVATIONAL QUOTE ====== -->
+  <section class="quote-section" id="quote"
+    style="background: linear-gradient(rgba(10,14,23,0.8), rgba(10,14,23,0.8)), url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&q=80&w=1440') center/cover no-repeat; backdrop-filter: blur(4px);">
+    <div class="quote-container">
+      <div class="quote-content animate-quote">
+        <span class="quote-mark" style="color: rgba(255,255,255,0.8); opacity: 1; margin-bottom: 16px;">"</span>
+        <blockquote class="quote-text" style="color: #ffffff; text-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+          Pancinglah rezeki dengan<br>
+          <em>sedekah.</em>
+        </blockquote>
+        <cite class="quote-author" style="color: rgba(255,255,255,0.7); font-size: 1.1rem;">— Ali bin Abi Thalib</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CTA / MARQUEE ====== -->
+  <section class="cta-section" id="cta">
+    <div class="marquee-container">
+      <div class="marquee-track" id="marqueeTrack">
+        <span class="marquee-text">BERSAMA MEMBANGUN GENERASI MUDA BERGUNA &bull; </span>
+        <span class="marquee-text">BERSAMA MEMBANGUN GENERASI MUDA BERGUNA &bull; </span>
+        <span class="marquee-text">BERSAMA MEMBANGUN GENERASI MUDA BERGUNA &bull; </span>
+        <span class="marquee-text">BERSAMA MEMBANGUN GENERASI MUDA BERGUNA &bull; </span>
+      </div>
+    </div>
+    <div class="cta-content animate-fade-in">
+      <h2>Siap Menjadi Bagian<br>dari Perubahan?</h2>
+      <p>Bergabunglah bersama ribuan relawan dan donatur yang telah berkomitmen membangun generasi muda Indonesia yang
+        lebih baik.</p>
+      <div class="cta-buttons">
+        <a href="#ygmb-peduli" class="btn-primary magnetic-btn" data-magnetic>Donasi Sekarang</a>
+        <a href="#kontak" class="btn-secondary magnetic-btn" data-magnetic>Hubungi Kami</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer" id="kontak">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand animate-fade-in">
+          <img src="LOGO 1.png" alt="YGMB Logo" class="footer-logo-img" width="40" height="40">
+          <span>YGMB</span>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col animate-fade-in" style="--delay:0.1s">
+            <h4>Navigasi</h4>
+            <a href="#hero">Beranda</a>
+            <a href="#tentang">Tentang</a>
+            <a href="#berita">Berita</a>
+            <a href="#program">Program</a>
+            <a href="#kontak">Kontak</a>
+          </div>
+          <div class="footer-col animate-fade-in" style="--delay:0.2s">
+            <h4>Program</h4>
+            <a href="#program">Program Tahunan</a>
+            <a href="#program">Program Bulanan</a>
+            <a href="#program">Program Mingguan</a>
+            <a href="#ygmb-peduli">YGMB Peduli</a>
+          </div>
+          <div class="footer-col animate-fade-in" style="--delay:0.3s">
+            <h4>Kontak</h4>
+            <a href="mailto:info@ygmb.or.id">info@ygmb.or.id</a>
+            <a href="tel:+6281234567890">+62 812 3456 7890</a>
+            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer">WhatsApp Kami</a>
+            <a href="#">Jakarta, Indonesia</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Yayasan Generasi Muda Berguna. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top magnetic-btn" id="backToTop" data-magnetic aria-label="Back to Top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 19V5M5 12l7-7 7 7" />
+    </svg>
+  </button>
+
+  <!-- WhatsApp FAB -->
+  <a href="https://wa.me/6281234567890?text=Halo%20YGMB%2C%20saya%20ingin%20bertanya" target="_blank"
+    rel="noopener noreferrer" class="whatsapp-floating-btn" id="waFab" aria-label="Hubungi via WhatsApp">
+    <img src="LOGO 1.png" alt="WhatsApp YGMB" style="width: 100%; height: 100%; object-fit: contain;">
+    <span class="wa-fab-tooltip">Hubungi Kami</span>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

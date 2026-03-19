@@ -420,7 +420,7 @@
   // =========================================================
   function initScrollAnimations() {
     const animatedEls = document.querySelectorAll(
-      '.animate-fade-in, .animate-slide-up, .animate-zoom'
+      '.animate-fade-in:not(.is-visible), .animate-slide-up:not(.is-visible), .animate-zoom:not(.is-visible)'
     );
 
     const revealEls = document.querySelectorAll('.animate-reveal');
@@ -505,9 +505,20 @@
     if (!overlay || !closeBtn || !body) return;
 
     function openModal(content) {
+      // Insert content but defer iframe src to avoid blocking the open animation
       body.innerHTML = content;
+
+      // Defer iframe src so modal slides in smoothly first
+      const iframes = body.querySelectorAll('iframe[data-src]');
+      iframes.forEach((iframe) => {
+        setTimeout(() => {
+          iframe.src = iframe.dataset.src;
+        }, 150);
+      });
+
       overlay.classList.add('is-open');
       document.body.classList.add('modal-open');
+
       // Animate progress bars inside modal
       body.querySelectorAll('.peduli-prog-fill').forEach((bar) => {
         setTimeout(() => bar.classList.add('animated'), 100);
@@ -515,8 +526,16 @@
     }
 
     function closeModal() {
+      // Kill YouTube audio immediately by blanking iframe src before DOM removal
+      body.querySelectorAll('iframe').forEach((iframe) => {
+        iframe.src = '';
+      });
       overlay.classList.remove('is-open');
       document.body.classList.remove('modal-open');
+      // Reset cursor state in case it was stuck on hover
+      document.body.classList.remove('cursor-hover');
+      // Clear after transition finishes so content doesn't flash
+      setTimeout(() => { body.innerHTML = ''; }, 400);
     }
 
     closeBtn.addEventListener('click', closeModal);
@@ -550,10 +569,41 @@
       card.setAttribute('tabindex', '0');
       card.style.cursor = 'pointer';
       const handler = () => {
-        const title = card.querySelector('h3') ? card.querySelector('h3').innerHTML : '';
-        const text = card.querySelector('p') ? card.querySelector('p').innerHTML : '';
-        const badgeHTML = card.querySelector('.berita-card-badge') ? card.querySelector('.berita-card-badge').outerHTML : '';
-        openModal(`<div class="modal-article" style="text-align: left;">${badgeHTML}<h2 style="margin-top:16px;">${title}</h2><p style="font-size:1.05rem; line-height:1.8;">${text}</p></div>`);
+        const title = card.querySelector('h3')?.innerHTML || '';
+        const fullContent = card.dataset.fullContent || card.querySelector('p')?.innerHTML || '';
+        const badgeHTML = card.querySelector('.berita-card-badge')?.outerHTML || '';
+        const dateHTML = card.querySelector('time')?.outerHTML || '';
+
+        let mediaHTML = '';
+        if (card.dataset.video) {
+          // Extract video ID from any YouTube URL format
+          const ytUrl = card.dataset.video;
+          let videoId = '';
+          const watchMatch = ytUrl.match(/[?&]v=([^&#]+)/);
+          const shortMatch = ytUrl.match(/youtu\.be\/([^?&#]+)/);
+          const embedMatch = ytUrl.match(/embed\/([^?&#]+)/);
+          if (watchMatch) videoId = watchMatch[1];
+          else if (shortMatch) videoId = shortMatch[1];
+          else if (embedMatch) videoId = embedMatch[1];
+          else videoId = ytUrl; // fallback: use as-is
+
+          if (videoId) {
+            // Use data-src so iframe loads after modal animation (no lag)
+            mediaHTML = `<div class="modal-media ratio-16-9"><iframe data-src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>`;
+          }
+        } else {
+          const img = card.querySelector('.berita-card-img img');
+          if (img) {
+            mediaHTML = `<div class="modal-media ratio-16-9"><img src="${img.src}" alt="${img.alt}" style="width:100%;height:100%;object-fit:cover;"></div>`;
+          }
+        }
+
+        openModal(`<div class="modal-article" style="text-align: left;">
+          ${mediaHTML}
+          <div style="margin-top:20px;">${badgeHTML}${dateHTML}</div>
+          <h2 style="margin-top:12px;">${title}</h2>
+          <p style="font-size:1.05rem; line-height:1.8; margin-top:12px;">${fullContent}</p>
+        </div>`);
       };
       card.addEventListener('click', handler);
       card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') handler(); });
@@ -709,6 +759,14 @@
     initNewsSlider();
     initProgressBars();
     initQuoteObserver();
+
+    // Expose reinit hook for Firebase dynamic content
+    window.__YGMB_REINIT_BERITA__ = () => {
+      initNewsSlider();
+      initProgressBars();
+      initModal();
+      initScrollAnimations();
+    };
   }
 
   if (document.readyState === 'loading') {

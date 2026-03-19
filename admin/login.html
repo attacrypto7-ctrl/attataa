@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YGMB Admin — Login</title>
+  <link rel="icon" type="image/png" href="../LOGO 1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="login-body">
+
+  <div class="login-bg">
+    <div class="login-orb login-orb-1"></div>
+    <div class="login-orb login-orb-2"></div>
+    <div class="login-orb login-orb-3"></div>
+  </div>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+      <div class="login-logo">
+        <img src="../LOGO 1.png" alt="YGMB Logo">
+        <div class="login-logo-text">
+          <span class="login-brand">YGMB</span>
+          <span class="login-subtitle">Admin Panel</span>
+        </div>
+      </div>
+
+      <h1 class="login-title">Selamat Datang</h1>
+      <p class="login-desc">Masuk untuk mengelola konten yayasan.</p>
+
+      <div id="loginError" class="login-error" style="display:none;"></div>
+
+      <form id="loginForm" class="login-form">
+        <div class="field-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="admin@ygmb.or.id" required autocomplete="email">
+        </div>
+        <div class="field-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" id="loginBtn" class="login-btn">
+          <span id="loginBtnText">Masuk</span>
+          <span id="loginSpinner" class="spinner" style="display:none;"></span>
+        </button>
+      </form>
+
+      <p class="login-footer">Yayasan Generasi Muda Berguna &copy; 2026</p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { auth } from '../firebase-config.js';
+    import { signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+    // Whitelist of allowed admin emails
+    const ALLOWED_EMAILS = ['rumahkasiharrahman@gmail.com', 'admin@ygmb.or.id'];
+
+    onAuthStateChanged(auth, (user) => {
+      if (user && ALLOWED_EMAILS.includes(user.email)) {
+        window.location.href = 'dashboard.html';
+      }
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('loginBtn');
+      const btnText = document.getElementById('loginBtnText');
+      const spinner = document.getElementById('loginSpinner');
+      const errorEl = document.getElementById('loginError');
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      errorEl.style.display = 'none';
+
+      if (!ALLOWED_EMAILS.includes(email)) {
+        errorEl.textContent = 'Email tidak diizinkan untuk mengakses admin.';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      btnText.textContent = 'Memuat...';
+      spinner.style.display = 'inline-block';
+      btn.disabled = true;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = 'dashboard.html';
+      } catch (err) {
+        errorEl.textContent = 'Login gagal. Periksa email dan password Anda.';
+        errorEl.style.display = 'block';
+      } finally {
+        btnText.textContent = 'Masuk';
+        spinner.style.display = 'none';
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

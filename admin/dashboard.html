@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YGMB Admin Dashboard</title>
+  <link rel="icon" type="image/png" href="../LOGO 1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- ====== TOAST NOTIFICATION ====== -->
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <!-- ====== LAYOUT WRAPPER ====== -->
+  <div class="admin-layout">
+
+    <!-- ====== SIDEBAR ====== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <img src="../LOGO 1.png" alt="YGMB" class="sidebar-logo">
+        <div>
+          <span class="sidebar-brand">YGMB</span>
+          <span class="sidebar-role">Admin Panel</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-section="overview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </button>
+        <button class="nav-item" data-section="news">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8L4 6v14a2 2 0 002 2z"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/><polyline points="9,7 10,7 15,7"/></svg>
+          Berita
+        </button>
+        <button class="nav-item" data-section="peduli">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          YGMB Peduli
+        </button>
+        <button class="nav-item" data-section="program">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Program
+        </button>
+        <button class="nav-item" data-section="doa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Titip Doa
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <span id="authEmail" class="auth-email"></span>
+        <button id="logoutBtn" class="logout-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Keluar
+        </button>
+      </div>
+    </aside>
+
+    <!-- ====== MAIN CONTENT ====== -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <button id="sidebarToggle" class="sidebar-toggle" aria-label="Toggle Sidebar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <h2 id="pageTitle" class="page-title">Dashboard</h2>
+      </header>
+
+      <!-- SECTION: Overview -->
+      <section id="section-overview" class="admin-section active">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon stat-icon--orange">💰</div>
+            <div>
+              <div class="stat-label">Total Donasi</div>
+              <div class="stat-value" id="stat-donasi">—</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon--green">👦</div>
+            <div>
+              <div class="stat-label">Anak Asuh</div>
+              <div class="stat-value" id="stat-anak">—</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon--blue">🤝</div>
+            <div>
+              <div class="stat-label">Relawan</div>
+              <div class="stat-value" id="stat-relawan">—</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon--purple">🙏</div>
+            <div>
+              <div class="stat-label">Titip Doa</div>
+              <div class="stat-value" id="stat-doa">—</div>
+            </div>
+          </div>
+        </div>
+        <p class="overview-hint">Pilih menu di sidebar untuk mengelola konten.</p>
+      </section>
+
+      <!-- SECTION: News -->
+      <section id="section-news" class="admin-section">
+        <div class="section-toolbar">
+          <h3>Manajemen Berita</h3>
+          <button class="btn-primary" id="btnAddNews">+ Tambah Berita</button>
+        </div>
+
+        <!-- Add/Edit Form -->
+        <div id="newsForm" class="admin-form-card" style="display:none;">
+          <h4 id="newsFormTitle">Tambah Berita</h4>
+          <input type="hidden" id="newsDocId">
+          <div class="field-group"><label>Judul Berita</label><input type="text" id="newsTitle" placeholder="Judul Berita..." required></div>
+          <div class="field-group"><label>Konten / Deskripsi</label><textarea id="newsContent" rows="4" placeholder="Tulis konten berita..."></textarea></div>
+          <div class="field-group">
+            <label>Kategori</label>
+            <select id="newsCategory">
+              <option value="Program">Program</option>
+              <option value="Donasi">Donasi</option>
+              <option value="Komunitas">Komunitas</option>
+              <option value="Sosial">Sosial</option>
+              <option value="Pendidikan">Pendidikan</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Tipe Media</label>
+            <select id="newsType" onchange="toggleMediaInput()">
+              <option value="Image">Gambar (URL)</option>
+              <option value="YouTube">YouTube Embed URL</option>
+            </select>
+          </div>
+          <div class="field-group" id="mediaURLGroup">
+            <label id="mediaURLLabel">URL Gambar</label>
+            <input type="url" id="newsMediaURL" placeholder="https://...">
+          </div>
+          <div class="form-actions">
+            <button class="btn-primary" id="btnSaveNews">Simpan</button>
+            <button class="btn-ghost" id="btnCancelNews">Batal</button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="admin-table" id="newsTable">
+            <thead><tr><th>Judul</th><th>Kategori</th><th>Tipe</th><th>Tanggal</th><th>Aksi</th></tr></thead>
+            <tbody id="newsTbody"><tr><td colspan="5" class="table-loading">Memuat data...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION: YGMB Peduli -->
+      <section id="section-peduli" class="admin-section">
+        <!-- Part 1: Global Stats -->
+        <div class="section-toolbar"><h3>Statistik Global</h3></div>
+        <div class="admin-form-card" style="margin-bottom:32px;">
+          <div class="two-col">
+            <div class="field-group"><label>Total Donasi Terkumpul (Rp)</label><input type="number" id="peduliTotalDonasi" placeholder="847500000"></div>
+            <div class="field-group"><label>Target Donasi (Rp)</label><input type="number" id="peduliTargetDonasi" placeholder="1000000000"></div>
+            <div class="field-group"><label>Jumlah Anak Asuh</label><input type="number" id="peduliAnakAsuh" placeholder="150"></div>
+            <div class="field-group"><label>Jumlah Relawan Aktif</label><input type="number" id="peduliRelawan" placeholder="80"></div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-primary" id="btnSavePeduli">Simpan Statistik</button>
+          </div>
+        </div>
+
+        <!-- Part 2: Milestone Cards CRUD -->
+        <div class="section-toolbar">
+          <h3>Kartu Milestone / Kampanye</h3>
+          <button class="btn-primary" id="btnAddMilestone">+ Tambah Milestone</button>
+        </div>
+        <div id="milestoneForm" class="admin-form-card" style="display:none;">
+          <h4 id="milestoneFormTitle">Tambah Milestone</h4>
+          <input type="hidden" id="milestoneDocId">
+          <div class="two-col">
+            <div class="field-group"><label>Judul Kampanye</label><input type="text" id="milestoneTitle" placeholder="Dana Beasiswa Prestasi"></div>
+            <div class="field-group"><label>Badge / Label</label>
+              <select id="milestoneBadge">
+                <option value="Dana Beasiswa">Dana Beasiswa</option>
+                <option value="Renovasi">Renovasi</option>
+                <option value="Literasi Digital">Literasi Digital</option>
+                <option value="Program">Program</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="field-group"><label>Dana Terkumpul (Rp)</label><input type="number" id="milestoneCurrent" placeholder="320000000"></div>
+            <div class="field-group"><label>Target Dana (Rp)</label><input type="number" id="milestoneTarget" placeholder="400000000"></div>
+          </div>
+          <div class="field-group"><label>Deskripsi Kampanye</label><textarea id="milestoneDesc" rows="4" placeholder="Ceritakan tujuan kampanye ini..."></textarea></div>
+          <div class="field-group">
+            <label>URL Gambar Kampanye</label>
+            <input type="url" id="milestoneImageURL" placeholder="https://images.unsplash.com/...">
+            <div id="milestoneImgPreview" class="img-preview"></div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-primary" id="btnSaveMilestone">Simpan</button>
+            <button class="btn-ghost" id="btnCancelMilestone">Batal</button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="admin-table">
+            <thead><tr><th>Gambar</th><th>Judul</th><th>Terkumpul</th><th>Target</th><th>%</th><th>Aksi</th></tr></thead>
+            <tbody id="milestoneTbody"><tr><td colspan="6" class="table-loading">Memuat data...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION: Program -->
+      <section id="section-program" class="admin-section">
+        <div class="section-toolbar">
+          <h3>Manajemen Program</h3>
+          <button class="btn-primary" id="btnAddProgram">+ Tambah Program</button>
+        </div>
+        <div id="programForm" class="admin-form-card" style="display:none;">
+          <h4 id="programFormTitle">Tambah Program</h4>
+          <input type="hidden" id="programDocId">
+          <div class="two-col">
+            <div class="field-group"><label>Nama Program</label><input type="text" id="programTitle" placeholder="Nama Program..."></div>
+            <div class="field-group"><label>Icon / Emoji</label><input type="text" id="programIcon" placeholder="📚"></div>
+          </div>
+          <div class="field-group"><label>Deskripsi Singkat</label><textarea id="programDesc" rows="3" placeholder="Deskripsi singkat..."></textarea></div>
+          <div class="field-group"><label>Tipe</label>
+            <select id="programTab">
+              <option value="tahunan">Program Tahunan</option>
+              <option value="bulanan">Program Bulanan</option>
+              <option value="mingguan">Program Mingguan</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>URL Gambar Program</label>
+            <input type="url" id="programImageURL" placeholder="https://images.unsplash.com/...">
+            <div id="programImgPreview" class="img-preview"></div>
+          </div>
+          <div class="form-actions">
+            <button class="btn-primary" id="btnSaveProgram">Simpan</button>
+            <button class="btn-ghost" id="btnCancelProgram">Batal</button>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table class="admin-table">
+            <thead><tr><th>Icon</th><th>Nama</th><th>Tipe</th><th>Deskripsi</th><th>Aksi</th></tr></thead>
+            <tbody id="programTbody"><tr><td colspan="5" class="table-loading">Memuat data...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION: Titip Doa -->
+      <section id="section-doa" class="admin-section">
+        <div class="section-toolbar"><h3>Moderasi Titip Doa</h3></div>
+        <div class="table-wrapper">
+          <table class="admin-table">
+            <thead><tr><th>Nama</th><th>No. WhatsApp</th><th>Pesan Doa</th><th>Waktu</th><th>Aksi</th></tr></thead>
+            <tbody id="doaTbody"><tr><td colspan="5" class="table-loading">Memuat data...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

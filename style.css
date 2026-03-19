@@ -96,6 +96,12 @@ button {
   cursor: none;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -1275,6 +1281,8 @@ body.modal-open {
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
   transform: translateY(30px) scale(0.96);
   transition: transform 0.4s var(--ease-out-expo);
+  will-change: transform;
+  contain: layout;
   scrollbar-width: thin;
   scrollbar-color: var(--primary-dim) transparent;
 }
@@ -1296,6 +1304,7 @@ body.modal-open {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 10;
   transition: background 0.3s, transform 0.3s;
 }
 
@@ -1486,10 +1495,18 @@ body.modal-open {
 }
 
 .tentang-card-img img {
-  width: 100%;
-  height: 100%;
+  width: 84%;
+  height: 84%;
   object-fit: contain;
-  padding: 10px;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.12));
+  transition: transform 0.4s var(--ease-out-expo), filter 0.4s;
+}
+
+.tentang-card:hover .tentang-card-img img {
+  transform: scale(1.06);
+  filter: drop-shadow(0 8px 28px rgba(255,107,53,0.25));
 }
 
 .tentang-card-body {
@@ -1612,6 +1629,8 @@ body.modal-open {
   transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s;
   display: flex;
   flex-direction: column;
+  contain: layout style;
+  will-change: transform;
 }
 
 .berita-card:hover {
@@ -1619,10 +1638,7 @@ body.modal-open {
   box-shadow: var(--shadow-lg);
 }
 
-.berita-card-badge {
-  position: absolute;
-  top: 16px;
-  left: 16px;
+.berita-card-badge-inline {
   background: var(--primary);
   color: #fff;
   font-size: 0.75rem;
@@ -1631,6 +1647,7 @@ body.modal-open {
   text-transform: uppercase;
   padding: 4px 12px;
   border-radius: 100px;
+  display: inline-block;
 }
 
 .berita-badge-green {
@@ -2288,6 +2305,13 @@ body.modal-open {
 
   .modal-box {
     padding: 32px 24px;
+    border-radius: 20px;
+  }
+
+  .modal-media.ratio-16-9 {
+    width: calc(100% + 48px);
+    margin: -32px -24px 24px -24px;
+    border-radius: 20px 20px 0 0;
   }
 
   /* Hide custom cursor on touch devices */
@@ -2336,3 +2360,127 @@ body.modal-open {
     flex: 0 0 92%;
   }
 }
+
+/* ---------- 17. TITIP DOA SECTION ---------- */
+.doa-section {
+  padding: var(--section-pad) 0;
+  background: linear-gradient(135deg, var(--bg-warm), #FFFDFB);
+  position: relative;
+  overflow: hidden;
+}
+
+.doa-container {
+  width: var(--container-width);
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.doa-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin: 48px 0;
+  position: relative;
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+.doa-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.doa-card-name {
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+.doa-card-text {
+  color: var(--text-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* Floating Label Form */
+.form-floating {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.form-floating input,
+.form-floating textarea {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text-dark);
+  transition: all 0.3s;
+  outline: none;
+}
+
+.form-floating input:focus,
+.form-floating textarea:focus {
+  background: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+}
+
+.form-floating label {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: all 0.3s var(--ease-out-expo);
+  background: transparent;
+  padding: 0 4px;
+}
+
+.form-floating input:focus ~ label,
+.form-floating input:not(:placeholder-shown) ~ label,
+.form-floating textarea:focus ~ label,
+.form-floating textarea:not(:placeholder-shown) ~ label {
+  top: -10px;
+  left: 16px;
+  font-size: 0.85rem;
+  color: var(--primary);
+  background: white;
+  border-radius: 4px;
+}
+
+/* Media Container */
+.modal-media.ratio-16-9 {
+  position: relative;
+  width: calc(100% + 96px);
+  margin: -48px -48px 32px -48px;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  border-radius: 24px 24px 0 0;
+  overflow: hidden;
+  background: #000;
+}
+
+.modal-media.ratio-16-9 iframe,
+.modal-media.ratio-16-9 img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+}
+/* Firebase dynamic elements removed - no longer needed since we use native IntersectionObserver */

@@ -1,13 +1,8 @@
 {
-  "name": "yggb-website",
+  "name": "yayasanku-backend",
   "version": "1.0.0",
-  "description": "YGGB Foundation Website with Xendit + Firebase donation integration",
-  "engines": {
-    "node": ">=18"
-  },
   "dependencies": {
-    "firebase-admin": "^12.0.0",
-    "xendit-node": "^6.0.0",
-    "node-fetch": "^3.3.2"
+    "firebase-admin": "^11.0.0",
+    "xendit-node": "^3.0.0"
   }
 }

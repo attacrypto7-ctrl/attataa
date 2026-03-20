@@ -13,6 +13,9 @@
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -300,51 +303,39 @@
   </template>
 
   <template id="peduli-modal-bank">
-    <div class="modal-article">
-      <span class="modal-badge modal-badge--green">Donasi Bank</span>
-      <h2 id="modalTitle">Formulir Konfirmasi Donasi</h2>
-      <p>Silakan lakukan transfer ke rekening resmi yayasan di bawah ini sebelum mengisi formulir konfirmasi.</p>
+    <div class="modal-article" style="text-align: left;">
+      <span class="modal-badge modal-badge--green">Donasi Online</span>
+      <h2 id="modalTitle">Formulir Donasi</h2>
+      <p style="color: var(--text-muted); margin-bottom: 24px;">Isi formulir di bawah dan kamu akan diarahkan ke halaman pembayaran Xendit yang aman. Mendukung transfer bank, QRIS, e-wallet, dan kartu kredit.</p>
 
-      <div
-        style="background: var(--bg-section); padding: 16px; border-radius: 12px; border: 1px solid var(--border-light); margin-bottom: 24px; text-align: left;">
-        <p style="margin-bottom: 4px; font-size: 0.9rem;"><strong>Bank Mandiri</strong></p>
-        <p style="margin-bottom: 4px; font-size: 1.2rem; font-weight: 700; color: var(--primary);">155-00-1405562-1</p>
-        <p style="margin-bottom: 12px; font-size: 0.9rem; color: var(--text-muted);">a.n YAYASAN GENERASI MUDA BERGUNA</p>
-        
-        <p style="margin-bottom: 4px; font-size: 0.9rem;"><strong>Bank Syariah Indonesia (BSI)</strong></p>
-        <p style="margin-bottom: 4px; font-size: 1.2rem; font-weight: 700; color: var(--primary);">7294243873</p>
-        <p style="margin-bottom: 0px; font-size: 0.9rem; color: var(--text-muted);">a.n YAYASAN GENERASI MUDA BERGUNA</p>
+      <!-- Nominal Shortcut Buttons -->
+      <div id="xenditAmountShortcuts" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;">
+        <button type="button" class="amount-chip" data-amount="25000">Rp 25K</button>
+        <button type="button" class="amount-chip" data-amount="50000">Rp 50K</button>
+        <button type="button" class="amount-chip" data-amount="100000">Rp 100K</button>
+        <button type="button" class="amount-chip" data-amount="250000">Rp 250K</button>
+        <button type="button" class="amount-chip" data-amount="500000">Rp 500K</button>
+        <button type="button" class="amount-chip" data-amount="1000000">Rp 1 Juta</button>
       </div>
 
-      <form class="donation-form"
-        onsubmit="event.preventDefault(); alert('Konfirmasi Donasi Berhasil Dikirim!'); document.getElementById('modalClose').click();">
+      <form class="donation-form" id="xenditDonationForm">
         <div class="donation-form-group">
-          <label for="donaturName">Nama Lengkap</label>
-          <input type="text" id="donaturName" class="donation-form-input" placeholder="Masukkan nama Anda" required>
+          <label for="xenditName">Nama Lengkap <span style="color:var(--primary)">*</span></label>
+          <input type="text" id="xenditName" class="donation-form-input" placeholder="Contoh: Ahmad Fauzi" required>
         </div>
         <div class="donation-form-group">
-          <label for="donasiTujuan">Donasi Untuk</label>
-          <select id="donasiTujuan" class="donation-form-input" required>
-            <option value="">Pilih Tujuan Donasi...</option>
-            <option value="tahunan">Program Tahunan</option>
-            <option value="bulanan">Program Bulanan</option>
-            <option value="mingguan">Program Mingguan</option>
-            <option value="umum">Donasi Umum</option>
-          </select>
+          <label for="xenditEmail">Alamat Email <span style="color:var(--primary)">*</span></label>
+          <input type="email" id="xenditEmail" class="donation-form-input" placeholder="email@kamu.com" required>
         </div>
         <div class="donation-form-group">
-          <label for="donasiJumlah">Jumlah Transfer (Rp)</label>
-          <input type="number" id="donasiJumlah" class="donation-form-input" placeholder="Contoh: 100000" min="10000"
-            required>
+          <label for="xenditAmount">Jumlah Donasi (Rp) <span style="color:var(--primary)">*</span></label>
+          <input type="number" id="xenditAmount" class="donation-form-input" placeholder="Minimum Rp 10.000" min="10000" required>
         </div>
-        <div class="donation-form-group">
-          <label for="donasiBukti">Upload Bukti Transfer</label>
-          <input type="file" id="donasiBukti" class="donation-form-input" accept="image/*" required
-            style="padding-top: 9px;">
-        </div>
-        <button type="submit" class="modal-donate-btn"
-          style="width: 100%; justify-content: center; margin-top: 16px; border: none; font-family: inherit;">Kirim
-          Konfirmasi</button>
+        <button type="submit" id="xenditSubmitBtn" class="modal-donate-btn"
+          style="width: 100%; justify-content: center; margin-top: 20px; border: none; font-family: inherit; font-size: 1rem;">
+          <span id="xenditBtnText">🔒 Lanjutkan Pembayaran</span>
+        </button>
+        <p style="text-align:center; font-size:0.78rem; color:var(--text-muted); margin-top:12px;">Pembayaran aman diproses oleh <strong>Xendit</strong>. Donasi Anda tercatat otomatis.</p>
       </form>
     </div>
   </template>

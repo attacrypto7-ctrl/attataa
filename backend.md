@@ -1,54 +1,33 @@
-# Project Specification: Admin Dashboard YGMB (Firebase + Vanilla JS)
+# Project: Auto-Verification Donation (Xendit + Netlify + Firebase)
 
-## 1. Role & Objective
-Anda adalah seorang **Senior Full-stack Developer** dengan keahlian khusus di **Firebase (v9+ Modular)** dan **Modern Vanilla JavaScript**.
-Tugas Anda adalah membangun sistem Admin Dashboard (CMS) untuk yayasan **"Yayasan Generasi Muda Berguna (YGMB)"**. Sistem ini harus ringan, aman, dan memiliki sinkronisasi real-time dengan landing page utama.
+## 1. Context
+Saya sedang membangun backend web dan migrasi ke Firebase. 
+- Hosting: Netlify.
+- Database: Firebase Firestore (Spark Plan).
+- Payment Gateway: Xendit (Mode Tes).
 
-## 2. Tech Stack Constraints
-- **Frontend:** Pure HTML5, CSS3 (Custom Properties, Flexbox, Grid).
-- **Styling UI:** Clean, Minimalist, Glassmorphism elements (sesuai tema landing page). High readability adalah prioritas.
-- **Backend/Baas:** Firebase v9+ (Modular SDK).
-    - **Authentication:** Email/Password (Restricted Access).
-    - **Firestore:** Database utama untuk konten dan statistik.
-    - **Storage:** Media storage untuk gambar berita/program.
+## 2. Configuration
+Data berikut sudah saya masukkan ke Environment Variables di Netlify:
+- XENDIT_SECRET_KEY
+- FIREBASE_PRIVATE_KEY
+- XENDIT_PUBLIC_KEY: xnd_public_development_47hBQLqzczll2bQVJGcLEmHulMbo8LB_fc_F0vMWzsbzRrIjdiZlNuCc58wzJ3o2
 
-## 3. Core Features & Requirements
+## 3. Requirements
 
-### A. Authentication (Security Gate)
-- Implementasi Firebase Auth.
-- **Access Control:** Hanya UID atau Email tertentu yang didefinisikan di config/whitelist yang bisa masuk.
-- **Route Guard:** Jika state `onAuthStateChanged` null, redirect otomatis ke `login.html`.
+### A. Backend (Netlify Functions)
+1.  **create-invoice.js**: 
+    - Menerima `amount`, `name`, dan `email` dari frontend.
+    - Membuat invoice via Xendit API.
+    - Mencatat data donasi ke Firestore (Koleksi: `donations`) dengan status `PENDING`.
+2.  **xendit-webhook.js**:
+    - Menerima callback dari Xendit.
+    - Jika status `PAID`, update Firestore:
+        - Set status donasi jadi `COMPLETED`.
+        - Update total saldo di `stats/ygmb_peduli` menggunakan `FieldValue.increment`.
 
-### B. UI/UX Layout
-- **Sidebar Navigation:** - Dashboard (Statistik Ringkas)
-    - News (Berita)
-    - YGMB Peduli (Milestone & Donasi)
-    - Program (Manajemen Program)
-    - Titip Doa (Moderasi)
-- **Main Content:** Area dinamis untuk form CRUD dan tabel data.
-- **Feedback Loop:** Tampilkan loading state (spinner) dan toast notification setelah aksi CRUD berhasil/gagal.
-
-### C. Module CRUD (Content Management)
-1.  **News Section:**
-    - Schema: `title`, `content`, `type` (Image/YouTube), `mediaURL`, `timestamp`.
-    - Upload gambar ke Firebase Storage jika tipe media adalah 'Image'.
-2.  **YGMB Peduli (Milestone):**
-    - Update data statistik: `totalDonasi`, `jumlahAnakAsuh`, `jumlahRelawan`.
-    - Data ini harus tersimpan di satu dokumen Firestore agar mudah ditarik sebagai pop-up di landing page.
-3.  **Program Section:**
-    - Schema: `iconPath`, `title`, `shortDescription`.
-
-### D. Moderation: 'Titip Doa'
-- Tarik data dari koleksi `titip_doa`.
-- Tampilkan dalam format **Table** (Nama, No WA, Pesan Doa).
-- Berikan tombol **Delete** untuk moderasi konten yang tidak pantas.
-
-### E. Migration & Real-time Sync
-- Gunakan `getFirestore`, `addDoc`, `updateDoc`, `deleteDoc`, dan `onSnapshot`.
-- Pastikan kode modular sehingga mudah di-maintain.
+### B. Frontend (Vanilla JS)
+- Integrasikan SweetAlert2 untuk pop-up.
+- Gunakan Firebase `onSnapshot` untuk memantau perubahan status donasi secara real-time. Jika status berubah jadi `COMPLETED`, tampilkan pesan sukses yang estetik.
 
 ## 4. Output Expected
-1.  **Structure:** Berikan struktur folder yang direkomendasikan.
-2.  **Code:** Sediakan kode HTML, CSS, dan JS secara terpisah.
-3.  **Firebase Config:** Berikan placeholder untuk Firebase Config agar saya bisa memasukkan API Key saya sendiri.
-4.  **Instructions:** Jelaskan cara setup Firestore Rules agar data aman.
+Berikan struktur folder yang rapi (termasuk netlify.toml) dan kode lengkap untuk masing-masing file tersebut.

@@ -304,6 +304,132 @@ function initFirebasePrograms() {
 }
 
 // -------------------------------------------------------
+// 7. XENDIT DONATION FORM → Netlify Function
+// -------------------------------------------------------
+function initXenditDonationForm() {
+  // Wire up whenever the modal with the Xendit form is opened
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('[data-modal-target="peduli-modal-bank"]');
+    if (!trigger) return;
+
+    // Give modal time to render template content
+    setTimeout(() => {
+      const form = document.getElementById('xenditDonationForm');
+      if (!form || form.dataset.wired) return;
+      form.dataset.wired = 'true';
+
+      // Amount chip shortcuts
+      document.querySelectorAll('.amount-chip').forEach((chip) => {
+        chip.addEventListener('click', () => {
+          const amountInput = document.getElementById('xenditAmount');
+          if (amountInput) amountInput.value = chip.dataset.amount;
+          document.querySelectorAll('.amount-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+        });
+      });
+
+      form.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        const btn = document.getElementById('xenditSubmitBtn');
+        const btnText = document.getElementById('xenditBtnText');
+        const name = document.getElementById('xenditName')?.value?.trim();
+        const email = document.getElementById('xenditEmail')?.value?.trim();
+        const amount = document.getElementById('xenditAmount')?.value?.trim();
+
+        if (!name || !email || !amount) return;
+
+        // Loading state
+        btn.disabled = true;
+        btnText.textContent = 'Memproses...';
+
+        try {
+          const res = await fetch('/.netlify/functions/create-invoice', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, amount: Number(amount) }),
+          });
+          const data = await res.json();
+
+          if (!res.ok || !data.invoiceUrl) {
+            throw new Error(data.error || 'Gagal membuat invoice.');
+          }
+
+          // Start real-time monitoring BEFORE redirecting
+          initDonationStatusMonitor(data.donationId);
+
+          // Show transition popup then redirect
+          await Swal.fire({
+            icon: 'info',
+            title: 'Menuju Halaman Pembayaran',
+            html: `Terima kasih, <strong>${name}</strong>!<br>Kamu akan diarahkan ke halaman pembayaran Xendit.`,
+            timer: 2500,
+            timerProgressBar: true,
+            showConfirmButton: false,
+            backdrop: 'rgba(10,14,23,0.85)',
+            customClass: { popup: 'swal-ygmb' },
+          });
+
+          // Open Xendit invoice in new tab
+          window.open(data.invoiceUrl, '_blank', 'noopener');
+          document.getElementById('modalClose')?.click();
+        } catch (err) {
+          console.error('[XenditForm]', err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            text: err.message || 'Terjadi kesalahan. Silakan coba lagi.',
+            backdrop: 'rgba(10,14,23,0.85)',
+            confirmButtonColor: '#ff6b35',
+            customClass: { popup: 'swal-ygmb' },
+          });
+        } finally {
+          btn.disabled = false;
+          btnText.textContent = '🔒 Lanjutkan Pembayaran';
+        }
+      });
+    }, 300);
+  });
+}
+
+// -------------------------------------------------------
+// 8. REAL-TIME DONATION STATUS MONITOR (onSnapshot)
+// -------------------------------------------------------
+function initDonationStatusMonitor(donationId) {
+  if (!donationId) return;
+
+  const donationRef = doc(db, 'donations', donationId);
+  let unsubscribe;
+
+  unsubscribe = onSnapshot(donationRef, (snap) => {
+    if (!snap.exists()) return;
+    const data = snap.data();
+
+    if (data.status === 'COMPLETED') {
+      // Stop listening once paid
+      if (unsubscribe) unsubscribe();
+
+      const formattedAmount = 'Rp ' + Number(data.paidAmount || data.amount).toLocaleString('id-ID');
+
+      Swal.fire({
+        icon: 'success',
+        title: '🎉 Donasi Berhasil!',
+        html: `
+          <p style="margin:0 0 8px;">Terima kasih atas kebaikan hati Anda.</p>
+          <p style="font-size:1.6rem;font-weight:800;color:#ff6b35;margin:12px 0;">${formattedAmount}</p>
+          <p style="color:#888;font-size:0.9rem;">Semoga menjadi amal jariyah yang mengalir terus. 🤲</p>
+        `,
+        confirmButtonText: 'Aamiin 🤲',
+        confirmButtonColor: '#ff6b35',
+        backdrop: 'rgba(10,14,23,0.9)',
+        showClass: { popup: 'animate__animated animate__bounceIn' },
+        customClass: { popup: 'swal-ygmb' },
+        allowOutsideClick: false,
+      });
+    }
+  });
+}
+
+// -------------------------------------------------------
 // INIT ALL
 // -------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
@@ -313,4 +439,28 @@ document.addEventListener('DOMContentLoaded', () => {
   initDoaFormSubmit();
   initFirebaseMilestones();
   initFirebasePrograms();
+  initXenditDonationForm();
+
+  // Check for donation completion via URL param (returning from Xendit page)
+  const urlParams = new URLSearchParams(window.location.search);
+  const donationIdFromURL = urlParams.get('donation');
+  const statusFromURL = urlParams.get('status');
+  if (donationIdFromURL) {
+    if (statusFromURL === 'success') {
+      initDonationStatusMonitor(donationIdFromURL);
+    } else if (statusFromURL === 'failed') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Pembayaran Gagal/Batal',
+        text: 'Transaksi Anda gagal diproses atau dibatalkan. Silakan coba kembali.',
+        customClass: {
+          popup: 'swal-ygmb'
+        },
+        confirmButtonText: 'Tutup',
+        confirmButtonColor: '#e74c3c'
+      });
+    }
+    // Clean up URL
+    window.history.replaceState({}, '', window.location.pathname + window.location.hash);
+  }
 });

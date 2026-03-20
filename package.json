@@ -1,0 +1,13 @@
+{
+  "name": "yggb-website",
+  "version": "1.0.0",
+  "description": "YGGB Foundation Website with Xendit + Firebase donation integration",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.0.0",
+    "xendit-node": "^6.0.0",
+    "node-fetch": "^3.3.2"
+  }
+}

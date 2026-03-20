@@ -1444,6 +1444,37 @@ body.modal-open {
   border-color: var(--primary);
 }
 
+/* ---------- DONATION AMOUNT CHIPS & SWEETALERT ---------- */
+.amount-chip {
+  padding: 8px 16px;
+  background: var(--bg-section);
+  border: 1px solid var(--border-light);
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-body);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+.amount-chip:hover, .amount-chip.active {
+  background: var(--primary-dim);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.swal-ygmb {
+  font-family: var(--font-body) !important;
+  border-radius: 24px !important;
+  background: var(--bg) !important;
+  color: var(--text-dark) !important;
+}
+
+.swal-ygmb .swal2-title {
+  font-family: var(--font-heading) !important;
+}
+
 /* ---------- TENTANG 3-CARD GRID ---------- */
 .tentang-container {
   width: var(--container-width);

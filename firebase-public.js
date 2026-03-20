@@ -350,7 +350,7 @@ function initXenditDonationForm() {
           });
           const data = await res.json();
 
-          if (!res.ok || !data.invoiceUrl) {
+          if (!res.ok || !data.checkoutUrl) {
             throw new Error(data.error || 'Gagal membuat invoice.');
           }
 
@@ -369,9 +369,8 @@ function initXenditDonationForm() {
             customClass: { popup: 'swal-ygmb' },
           });
 
-          // Open Xendit invoice in new tab
-          window.open(data.invoiceUrl, '_blank', 'noopener');
-          document.getElementById('modalClose')?.click();
+          // Redirect to Xendit invoice
+          window.location.href = data.checkoutUrl;
         } catch (err) {
           console.error('[XenditForm]', err);
           Swal.fire({

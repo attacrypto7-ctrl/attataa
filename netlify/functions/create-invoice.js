@@ -7,13 +7,13 @@ if (!admin.apps.length) {
   console.log("raw key length:", pkRaw.length);
   console.log("raw key start:", pkRaw.slice(0, 30));
   console.log("raw key end:", pkRaw.slice(-30));
-  
+
   let privateKey = pkRaw
     .replace(/\\n/g, '\n')
     .replace(/"/g, '')
     .replace(/'/g, '')
     .trim();
-    
+
   console.log("cleaned key length:", privateKey.length);
   console.log("cleaned key start:", privateKey.slice(0, 30));
   console.log("cleaned key end:", privateKey.slice(-30));
@@ -54,7 +54,7 @@ exports.handler = async (event, context) => {
 
     // 2. Create Xendit Invoice
     const invoiceData = {
-      externalId: donationId, 
+      externalId: donationId,
       amount: parseInt(amount),
       payerEmail: email,
       description: `Donasi YGGB - ${name}`,
@@ -83,16 +83,38 @@ exports.handler = async (event, context) => {
     // 4. Return the Checkout URL to frontend
     return {
       statusCode: 200,
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         checkoutUrl: invoice.invoiceUrl,
-        donationId: donationId 
+        donationId: donationId
+      }),
+    };
+    // 4. Return the Checkout URL to frontend
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        checkoutUrl: invoice.invoiceUrl,
+        donationId: donationId
       }),
     };
   } catch (error) {
-    console.error('Error creating invoice:', error);
+    // INI BAGIAN PENTING: Paksa error keluar di log Netlify
+    console.error('================ DETEKSI ERROR ================');
+    console.error('Pesan:', error.message);
+
+    // Kalau error datang dari Xendit, bongkar isinya:
+    if (error.response && error.response.data) {
+      console.error('DETAIL XENDIT:', JSON.stringify(error.response.data, null, 2));
+    } else {
+      console.error('DETAIL ERROR LAIN:', error);
+    }
+    console.error('==============================================');
+
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Server Error', details: error.message }),
+      body: JSON.stringify({
+        error: 'Gagal membuat invoice',
+        debug: error.message
+      }),
     };
   }
 };

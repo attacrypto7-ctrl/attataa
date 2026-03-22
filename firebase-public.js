@@ -283,7 +283,7 @@ function initFirebasePrograms() {
           <div class="program-card-photo" style="height:140px;border-radius:12px;overflow:hidden;margin-bottom:16px;">
             <img src="${imgSrc}" alt="${d.title || ''}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
           </div>
-          <div class="program-badge" style="display:inline-flex;align-items:center;background:rgba(255,107,53,0.1);color:var(--primary);padding:6px 12px;border-radius:100px;font-size:0.85rem;font-weight:700;margin-bottom:12px;">
+          <div class="program-badge" style="display:inline-flex;align-items:center;background:rgba(0,128,62,0.1);color:var(--primary);padding:6px 12px;border-radius:100px;font-size:0.85rem;font-weight:700;margin-bottom:12px;">
             ${d.icon || '📌'} ${d.title || ''}
           </div>
           <h3>${d.title || ''}</h3>
@@ -378,7 +378,7 @@ function initXenditDonationForm() {
             title: 'Oops!',
             text: err.message || 'Terjadi kesalahan. Silakan coba lagi.',
             backdrop: 'rgba(10,14,23,0.85)',
-            confirmButtonColor: '#ff6b35',
+            confirmButtonColor: '#00803e',
             customClass: { popup: 'swal-ygmb' },
           });
         } finally {
@@ -414,11 +414,11 @@ function initDonationStatusMonitor(donationId) {
         title: '🎉 Donasi Berhasil!',
         html: `
           <p style="margin:0 0 8px;">Terima kasih atas kebaikan hati Anda.</p>
-          <p style="font-size:1.6rem;font-weight:800;color:#ff6b35;margin:12px 0;">${formattedAmount}</p>
+          <p style="font-size:1.6rem;font-weight:800;color:#00803e;margin:12px 0;">${formattedAmount}</p>
           <p style="color:#888;font-size:0.9rem;">Semoga menjadi amal jariyah yang mengalir terus. 🤲</p>
         `,
         confirmButtonText: 'Aamiin 🤲',
-        confirmButtonColor: '#ff6b35',
+        confirmButtonColor: '#00803e',
         backdrop: 'rgba(10,14,23,0.9)',
         showClass: { popup: 'animate__animated animate__bounceIn' },
         customClass: { popup: 'swal-ygmb' },

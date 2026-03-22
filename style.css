@@ -12,9 +12,9 @@
   --primary-light: #00a852;
   --primary-dark: #005a2b;
   --primary-dim: rgba(0, 128, 62, 0.15);
-  --secondary: #FF6B35;
-  --secondary-light: #FF8F65;
-  --secondary-dark: #E55A2B;
+  --secondary: #00B894;
+  --secondary-light: #55EFC4;
+  --secondary-dark: #00996B;
   --accent-blue: #0984E3;
   --accent-purple: #6C5CE7;
   --accent-yellow: #FDCB6E;
@@ -1545,7 +1545,7 @@ body.modal-open {
 
 .tentang-card:hover .tentang-card-img img {
   transform: scale(1.06);
-  filter: drop-shadow(0 8px 28px rgba(255,107,53,0.25));
+  filter: drop-shadow(0 8px 28px rgba(0,128,62,0.25));
 }
 
 .tentang-card-body {

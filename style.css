@@ -8,13 +8,13 @@
 /* ---------- CSS Custom Properties ---------- */
 :root {
   /* Cheerful Color Palette */
-  --primary: #FF6B35;
-  --primary-light: #FF8F65;
-  --primary-dark: #E55A2B;
-  --primary-dim: rgba(255, 107, 53, 0.15);
-  --secondary: #00B894;
-  --secondary-light: #55EFC4;
-  --secondary-dark: #00996B;
+  --primary: #00803e;
+  --primary-light: #00a852;
+  --primary-dark: #005a2b;
+  --primary-dim: rgba(0, 128, 62, 0.15);
+  --secondary: #FF6B35;
+  --secondary-light: #FF8F65;
+  --secondary-dark: #E55A2B;
   --accent-blue: #0984E3;
   --accent-purple: #6C5CE7;
   --accent-yellow: #FDCB6E;
@@ -302,7 +302,7 @@ body.cursor-hover .cursor-follower {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #FFF8F3 0%, #FFF0E6 30%, #E8F8F5 60%, #F0F7FF 100%);
+  background: linear-gradient(135deg, #F0FFF4 0%, #E6FFFA 30%, #E8F8F5 60%, #F0F7FF 100%);
 }
 
 .hero-bg {
@@ -442,11 +442,15 @@ body.cursor-hover .cursor-follower {
 }
 
 .hero-title .word-reveal:nth-child(1) {
-  color: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .hero-title .word-reveal:nth-child(2) {
-  color: var(--secondary-dark);
+  color: var(--accent-blue);
 }
 
 .hero-title .word-reveal:nth-child(3) {
@@ -454,7 +458,11 @@ body.cursor-hover .cursor-follower {
 }
 
 .hero-title .word-reveal:nth-child(4) {
-  color: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .hero-desc {
@@ -474,7 +482,7 @@ body.cursor-hover .cursor-follower {
   font-size: 1rem;
   font-weight: 600;
   color: #fff;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  background: linear-gradient(135deg, #00a852, #00803e, #005a2b);
   border-radius: 100px;
   position: relative;
   overflow: hidden;
@@ -957,7 +965,7 @@ body.cursor-hover .cursor-follower {
   padding: var(--section-pad) 0;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #FFF8F3 0%, #FFF0E6 50%, #E8F8F5 100%);
+  background: linear-gradient(135deg, #F0FFF4 0%, #E6FFFA 50%, #E8F8F5 100%);
 }
 
 .marquee-container {
@@ -1231,7 +1239,7 @@ body.cursor-hover .cursor-follower {
   width: auto;
   max-width: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.7));
+  filter: drop-shadow(0 0 10px rgba(0, 128, 62, 0.7));
 }
 
 .footer-logo-img {
@@ -2141,7 +2149,7 @@ body.modal-open {
 }
 
 .whatsapp-floating-btn img {
-  filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.7));
+  filter: drop-shadow(0 0 10px rgba(0, 128, 62, 0.7));
   transition: filter 0.3s;
 }
 
@@ -2152,7 +2160,7 @@ body.modal-open {
 }
 
 .whatsapp-floating-btn:hover img {
-  filter: drop-shadow(0 0 16px rgba(255, 107, 53, 0.9));
+  filter: drop-shadow(0 0 16px rgba(0, 128, 62, 0.9));
 }
 
 .wa-fab-tooltip {

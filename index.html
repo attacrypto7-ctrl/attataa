@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YGMB - Yayasan Generasi Muda Berguna</title>
+  <title>Rumah Kasih Arrahman - Yayasan Generasi Muda Berguna</title>
   <meta name="description" content="Yayasan Generasi Muda Berguna">
-  <link rel="icon" type="image/png" href="LOGO 1.png">
+  <link rel="icon" type="image/png" href="LOGO 2.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -42,8 +42,8 @@
   <header class="header" id="header">
     <nav class="navbar">
       <a href="#" class="nav-logo" aria-label="YGMB Home">
-        <img src="LOGO 1.png" alt="Logo YGMB" class="navbar-logo-img">
-        <span class="logo-text">YGMB</span>
+        <img src="LOGO 2.png" alt="Logo YGMB" class="navbar-logo-img">
+        <span class="logo-text">Rumah Kasih Arrahman</span>
       </a>
       <ul class="nav-links">
         <li><a href="#hero" class="nav-link magnetic-link" data-magnetic>Beranda</a></li>
@@ -52,7 +52,7 @@
         <li><a href="#program" class="nav-link magnetic-link" data-magnetic>Program</a></li>
         <li><a href="#kontak" class="nav-link magnetic-link" data-magnetic>Kontak</a></li>
       </ul>
-      <a href="#ygmb-peduli" class="nav-cta magnetic-btn" data-magnetic>Donasi Sekarang</a>
+      <button class="nav-cta magnetic-btn" data-modal-target="modal-donasi-pilihan" data-magnetic style="font-family: inherit;">Donasi Sekarang</button>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
         <span></span><span></span><span></span>
       </button>
@@ -69,7 +69,7 @@
       <div class="hero-particles" id="heroParticles"></div>
     </div>
     <div class="hero-content">
-      <p class="hero-tagline animate-fade-in">Yayasan Generasi Muda Berguna</p>
+      <p class="hero-tagline animate-fade-in">Rumah Kasih Arrahman</p>
       <h1 class="hero-title">
         <span class="word-reveal" style="--i:0">Membangun</span>
         <span class="word-reveal" style="--i:1">Generasi</span>
@@ -80,10 +80,10 @@
         pendidikan, pemberdayaan, dan aksi nyata untuk generasi muda Indonesia.
 
       </p>
-      <a href="#ygmb-peduli" class="hero-cta magnetic-btn" data-magnetic>
+      <button class="hero-cta magnetic-btn" data-modal-target="modal-donasi-pilihan" data-magnetic style="font-family: inherit;">
         <span class="cta-text">Donasi Sekarang</span>
         <span class="cta-arrow">&rarr;</span>
-      </a>
+      </button>
     </div>
 
   </section>
@@ -185,7 +185,7 @@
   <section class="peduli" id="ygmb-peduli">
     <div class="peduli-container">
       <div class="peduli-header">
-        <span class="section-label animate-slide-up">#YGMB Peduli</span>
+        <span class="section-label animate-slide-up">#Rumah Kasih Peduli</span>
         <h2 class="peduli-title animate-slide-up" style="--i:1">Bersama Kita Bisa<br>Membuat Perbedaan</h2>
         <p class="peduli-desc animate-slide-up" style="--i:2">Setiap donasi Anda adalah harapan bagi generasi muda yang
           membutuhkan. Bergabunglah bersama ribuan donatur yang telah mengubah hidup mereka.</p>
@@ -210,15 +210,35 @@
       </div>
 
       <div class="peduli-cta animate-fade-in">
-        <a href="https://wa.me/6285825131136?text=Halo%20YGMB%2C%20saya%20ingin%20berdonasi" target="_blank"
+        <a href="https://wa.me/6285825131136?text=Halo%20Rumah%20Kasih%20Arrahman%2C%20saya%20ingin%20berdonasi" target="_blank"
           rel="noopener noreferrer" class="btn-primary magnetic-btn" data-magnetic>Donasi via WhatsApp</a>
-        <button class="btn-secondary magnetic-btn" data-modal-target="peduli-modal-bank" data-magnetic>Donasi Via
-          Bank</button>
+        <button class="btn-secondary magnetic-btn" data-modal-target="peduli-modal-bank" data-magnetic style="display: flex; flex-direction: column; align-items: center; padding: 12px 24px; font-family: inherit;">
+          <span style="font-weight: 600;">Donasi Via Bank</span>
+          <span style="font-size: 0.75rem; opacity: 0.8; font-weight: normal; margin-top: 4px;">(Terima QRIS, e-Wallet, dll)</span>
+        </button>
       </div>
     </div>
   </section>
 
   <!-- Hidden Modal Content for Peduli -->
+  <template id="modal-donasi-pilihan">
+    <div class="modal-article" style="text-align: center;">
+      <span class="modal-badge modal-badge--blue">Metode Donasi</span>
+      <h2 id="modalTitle" style="margin-bottom: 24px;">Pilih Metode Pembayaran</h2>
+      
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <a href="https://wa.me/6285825131136?text=Halo%20Rumah%20Kasih%20Arrahman%2C%20saya%20ingin%20berdonasi" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width: 100%; justify-content: center; padding: 16px; font-size: 1.05rem; text-decoration: none;">
+          Donasi via WhatsApp
+        </a>
+
+        <button class="btn-secondary" style="width: 100%; justify-content: center; padding: 16px; font-size: 1.05rem; flex-direction: column; align-items: center; cursor: pointer; border: 2px solid var(--border-light);" onclick="document.getElementById('modalClose').click(); setTimeout(() => document.querySelector('.peduli-cta [data-modal-target=\'peduli-modal-bank\']').click(), 400);">
+          <span style="font-weight: 600;">Donasi Via Bank</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; font-weight: normal;">(Terima QRIS, Virtual Account, Kartu Kredit, dll)</span>
+        </button>
+      </div>
+    </div>
+  </template>
+
   <template id="peduli-modal-1">
     <div class="modal-article">
       <span class="modal-badge">Dana Beasiswa</span>
@@ -457,7 +477,7 @@
       <p>Bergabunglah bersama ribuan relawan dan donatur yang telah berkomitmen membangun generasi muda Indonesia yang
         lebih baik.</p>
       <div class="cta-buttons">
-        <a href="#ygmb-peduli" class="btn-primary magnetic-btn" data-magnetic>Donasi Sekarang</a>
+        <button class="btn-primary magnetic-btn" data-modal-target="modal-donasi-pilihan" data-magnetic style="font-family: inherit;">Donasi Sekarang</button>
         <a href="#kontak" class="btn-secondary magnetic-btn" data-magnetic>Hubungi Kami</a>
       </div>
     </div>
@@ -468,8 +488,8 @@
     <div class="footer-container">
       <div class="footer-top">
         <div class="footer-brand animate-fade-in">
-          <img src="LOGO 1.png" alt="YGMB Logo" class="footer-logo-img" width="40" height="40">
-          <span>YGMB</span>
+          <img src="LOGO 2.png" alt="YGMB Logo" class="footer-logo-img" width="40" height="40">
+          <span style="color: var(--primary); font-weight: bold;">Rumah Kasih Arrahman</span>
         </div>
         <div class="footer-links">
           <div class="footer-col animate-fade-in" style="--delay:0.1s">
@@ -485,7 +505,7 @@
             <a href="#program">Program Tahunan</a>
             <a href="#program">Program Bulanan</a>
             <a href="#program">Program Mingguan</a>
-            <a href="#ygmb-peduli">YGMB Peduli</a>
+            <a href="#ygmb-peduli" style="color: var(--primary);">Rumah Kasih Peduli</a>
           </div>
           <div class="footer-col animate-fade-in" style="--delay:0.3s">
             <h4>Kontak</h4>
@@ -513,7 +533,7 @@
   <!-- WhatsApp FAB -->
   <a href="https://wa.me/6285825131136?text=Halo%20YGMB%2C%20saya%20ingin%20bertanya" target="_blank"
     rel="noopener noreferrer" class="whatsapp-floating-btn" id="waFab" aria-label="Hubungi via WhatsApp">
-    <img src="LOGO 1.png" alt="WhatsApp YGMB" style="width: 100%; height: 100%; object-fit: contain;">
+    <img src="LOGO 2.png" alt="WhatsApp YGMB" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
     <span class="wa-fab-tooltip">Hubungi Kami</span>
   </a>
 
